@@ -17,12 +17,15 @@ class Inputs extends Component {
  handleOptions = (e) => {
    let {tools} = this.state;
     if (e.target.checked){
-        tools.push(e.target.value);
+     let toolExisting = tools.includes(e.target.value);
+     if (!toolExisting) {
+          tools.push(e.target.value);
+         }
      }else {
-       tools.filter(tool=> tool !== e.target.value);
+      tools = tools.filter(tool=> tool !== e.target.value);
      }
-      
-     this.setState({tools});
+    this.setState({tools});
+  
  }
  render() {
   return (
@@ -50,15 +53,15 @@ class Inputs extends Component {
       </div>
       <h3>Choose Your Options</h3>
       <div className="form-check form-check-inline">
-       <input className="form-check-input" type="checkbox" name="tools" id="option_01" onChange={this.handleOptions} value="js" />
+       <input className="form-check-input" type="checkbox" name="tools" id="option_01" onChange={this.handleOptions} value="js" checked={this.state.tools.includes("js")}/>
        <label className="form-check-label" htmlFor="option_01">JS</label>
       </div>
       <div className="form-check form-check-inline">
-       <input className="form-check-input" type="checkbox" name="tools" id="option_02" onChange={this.handleOptions} value="vuejs" />
-       <label className="form-check-label" htmlFor="option_02">Vue JS</label>
+       <input className="form-check-input" type="checkbox" name="tools" id="option_02" onChange={this.handleOptions} value="vuejs" checked={this.state.tools.includes("vuejs") }/>
+       <label className="form-check-label" htmlFor="option_02" >Vue JS</label>
       </div>
       <div className="form-check form-check-inline">
-       <input className="form-check-input" type="checkbox" name="tools" id="option_03" onChange={this.handleOptions} value="vuejs" />
+       <input className="form-check-input" type="checkbox" name="tools" id="option_03" onChange={this.handleOptions} value="reactjs" checked={this.state.tools.includes("reactjs")} />
        <label className="form-check-label" htmlFor="option_03">React JS</label>
       </div>
       <div className="form-check form-check-block">
